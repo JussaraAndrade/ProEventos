@@ -96,3 +96,55 @@ npm install bootstrap@5 --save
 ```sh
 ng add ngx-bootstrap@6.2.0
 ```
+## Solução do Projetos
+1. Criação novo projeto
+```sh
+dotnet new
+```
+2. Criação solução do projeto
+```sh
+dotnet new sln -n ProEventos
+```
+3. Criação classlib Persistência
+```sh
+dotnet new classlib -n ProEventos.Persistence
+```
+4. Criação classlib Domain
+```sh
+dotnet new classlib -n ProEventos.Domain
+```
+5. Criação classlib Application
+```sh
+dotnet new classlib -n ProEventos.Application
+```
+Obs: Fluxo de comunicação: Api entra em contato com Application que ultilizam Domain, e a Application entra em contato com a Persistence.
+
+## Referência do Projeto
+
+1. Referenciar solução com Application
+```sh
+dotnet sln ProEventos.sln add ProEventos.Application
+```
+2. Referenciar solução com Domain
+```sh
+dotnet sln ProEventos.sln add ProEventos.Domain
+```
+3. Referenciar solução com ProEventos.Api
+```sh
+dotnet sln ProEventos.sln add ProEventos.Api
+```
+4. Referenciar solução com Persistence
+```sh
+dotnet sln ProEventos.sln add ProEventos.Persistence
+```
+
+## Associar os projetos
+
+1. Adicionar referencia do Application
+```sh
+dotnet add ProEventos.API/ProEventos.API.csproj reference ProEventos.Application
+```
+Obs: Persistence recebe referência do Domain, e Application recebe referência Domain e também Persistence, Domain não tem nenhuma referência.
+
+Dicas: comando para executar o build
+
