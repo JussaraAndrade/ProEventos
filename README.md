@@ -96,7 +96,6 @@ npm install bootstrap@5 --save
 ```sh
 ng add ngx-bootstrap@6.2.0
 ```
-
 ## Solução do Projetos
 1. Criação novo projeto
 ```sh
