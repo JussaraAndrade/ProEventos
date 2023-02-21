@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/Evento';
@@ -25,12 +27,15 @@ export class EventosComponent implements OnInit {
 
   // Injeta
   constructor(
-    private _eventoService: EventoService,
-    private modalService: BsModalService
+    private eventoService: EventoService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
    /* Método que vai ser chamado antes de inicializar aplicação */
   public ngOnInit(): void {
+    this.spinner.show();
     this.getEventos();
   }
 
@@ -65,13 +70,17 @@ export class EventosComponent implements OnInit {
     nesse Observable retorna dois item principais que são response e error.
   */
   public getEventos(): void {
-    this._eventoService.getEventos().subscribe(
-      (eventos: Evento[]) => { // Informando a tipagem
-        this.eventos = eventos;
+    this.eventoService.getEventos().subscribe({
+      next: (eventos: Evento[]) => { // Informando a tipagem Evento[] - recebe os valores da chamada da api
+        this.eventos = eventos; // recebe o valores para atribuir em uma outra propriedes para refletir na tabela
         this.eventosFiltrados = this.eventos;
       },
-      error => console.log(error),
-    );
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar os Eventos.', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   openModal(template: TemplateRef<any>): void {
@@ -80,6 +89,7 @@ export class EventosComponent implements OnInit {
 
   confirm(): void {
     this.modalRef?.hide();
+    this.toastr.success('O Evento foi deletado com Sucesso.', 'Deletado!');
   }
 
   decline(): void {
