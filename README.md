@@ -149,3 +149,8 @@ Obs: Persistence recebe referência do Domain, e Application recebe referência 
 
 Dicas: comando para executar o build
 
+## pipe 
+1. Gerar arquivo pipe
+```sh
+ng generate pipe DateTimeFormat
+```
