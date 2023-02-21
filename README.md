@@ -153,3 +153,9 @@ Dicas: comando para executar o build
 ```sh
 ng generate pipe DateTimeFormat
 ```
+
+## Erro ao instalar @angular/animations
+1. Resolução: atualizar o Angular
+```sh
+  ng update @angular/core @angular/cli
+```
