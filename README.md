@@ -155,7 +155,36 @@ ng generate pipe DateTimeFormat
 ```
 
 ## Erro ao instalar @angular/animations
-1. Resolução: atualizar o Angular
+1. Resolução do problema: atualizar o Angular
 ```sh
   ng update @angular/core @angular/cli
+```
+
+## Comando para criar components 
+1. Dentro da pasta especifica
+```sh
+  ng g c components/eventos/evento-detalhe --module app
+```
+
+## NuGet Gallery
+1. Pacote
+```sh
+  Microsoft.EntityFrameworkCore
+```
+
+## Migrations 
+1. Comando para executar a migrations na pasta (../ProEventos/back/src)
+```sh
+  dotnet ef migrations add Initial -p ProEventos.Persistence -s ProEventos.API
+```
+
+## Atualizar Pacotes
+```sh
+  dotnet restore
+```
+
+## Banco de dados
+1. Cria banco de dados no diretório da API
+```sh
+  dotnet ef database update -s ProEventos.API
 ```
